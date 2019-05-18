@@ -39,6 +39,7 @@
               <v-date-picker
                 v-model="picker"
                 first-day-of-week="1"
+                :min="todayDate"
               ></v-date-picker>
             </v-layout>
             <v-btn flat @click="e1 = 1">Back</v-btn>
@@ -94,6 +95,7 @@ export default {
     return {
       e1: 0,
       picker: new Date().toISOString().substr(0, 10),
+      todayDate: new Date().toISOString().substr(0, 10),
       snackbar: false,
     };
   },
