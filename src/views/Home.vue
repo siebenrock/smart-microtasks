@@ -7,26 +7,32 @@
     </v-container>
 
     <v-tabs fixed-tabs color="rgba(255, 0, 0, 0)">
-      <v-tab to="/open">Open Tasks</v-tab>
-      <v-tab to="/completed">Completed Tasks</v-tab>
-      <v-tab to="/validated">Validated Tasks</v-tab>
+      <v-tab to="/open" @click="tab = 0">Open Tasks</v-tab>
+      <v-tab to="/completed" @click="tab = 1">Completed Tasks</v-tab>
+      <v-tab to="/validated" @click="tab = 2">Validated Tasks</v-tab>
     </v-tabs>
 
-    <v-container fluid grid-list-md text-xs-center>
+    <v-container fluid grid-list-md>
       <v-layout row wrap>
-        <v-flex v-for="i in 4" :key="`3${i}`" xs3>
-          <v-card dark color="secondary">
-            <v-card-text class="px-0">3</v-card-text>
-          </v-card>
-        </v-flex>
+        <v-flex v-for="i in 16" :key="`3${i}`" xs3> <Task></Task></v-flex>
       </v-layout>
     </v-container>
   </span>
 </template>
 
 <script>
+import Task from "@/components/Task";
+
 export default {
   name: "home",
+  components: {
+    Task,
+  },
+  data() {
+    return {
+      tab: 0,
+    };
+  },
 };
 </script>
 
