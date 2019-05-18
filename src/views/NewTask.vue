@@ -66,9 +66,21 @@
             ></v-text-field>
 
             <v-btn flat @click="e1 = 2">Back</v-btn>
-            <v-btn color="primary" @click="e1 = 1">
+            <v-btn color="primary" @click="snackbar = true">
               Submit
             </v-btn>
+
+            <v-snackbar
+              v-model="snackbar"
+              color="green"
+              timeout="4000"
+              vertical="true"
+            >
+              Task submission successful!
+              <v-btn dark flat @click="snackbar = false">
+                Close
+              </v-btn>
+            </v-snackbar>
           </v-stepper-content>
         </v-container>
       </v-stepper-items>
@@ -77,12 +89,12 @@
 </template>
 
 <script>
-var today = new Date();
 export default {
   data() {
     return {
       e1: 0,
       picker: new Date().toISOString().substr(0, 10),
+      snackbar: false,
     };
   },
 };
@@ -91,5 +103,14 @@ export default {
 <style scoped>
 h2 {
   margin-bottom: 20px;
+}
+p {
+  text-decoration: none;
+}
+div {
+  text-decoration: none;
+}
+a {
+  text-decoration: none;
 }
 </style>
