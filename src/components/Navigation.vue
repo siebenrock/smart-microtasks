@@ -25,10 +25,21 @@
       ></v-toolbar-side-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
       <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
-      <v-btn flat class="hidden-sm-and-down">Menu</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
-      <v-btn flat class="hidden-sm-and-down">SIGN IN</v-btn>
-      <v-btn color="light-blue darken-2" class="hidden-sm-and-down">JOIN</v-btn>
+
+      <router-link :to="{ name: 'home' }">
+        <v-btn flat class="hidden-sm-and-down">Overview</v-btn>
+      </router-link>
+
+      <router-link :to="{ name: 'about' }">
+        <v-btn flat class="hidden-sm-and-down">About</v-btn>
+      </router-link>
+
+      <router-link :to="{ name: 'newTask' }">
+        <v-btn color="light-blue darken-2" class="hidden-sm-and-down"
+          >New Task</v-btn
+        >
+      </router-link>
     </v-toolbar>
   </span>
 </template>
@@ -46,4 +57,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+nav a {
+  text-decoration: none;
+}
+</style>
