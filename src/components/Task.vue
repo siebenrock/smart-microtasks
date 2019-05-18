@@ -1,18 +1,27 @@
 <template>
-  <v-card color="light-blue lighten-4">
+  <v-card color="white">
     <v-card-title primary-title>
       <div>
-        <h3 class="headline">Super Micro Task</h3>
-        <div>Deadline: 20.05.2019</div>
-        <div>Reward: $5.00</div>
+        <h3 class="headline">Task</h3>
+        <div>Deadline: <i>2019-05-15</i></div>
+        <div>Reward: <i>$5.00</i></div>
       </div>
     </v-card-title>
+
+    <v-card-actions>
+      <TaskDialog :taskProp="taskData"></TaskDialog>
+    </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import TaskDialog from "@/components/TaskDialog";
+
 export default {
   name: "Task",
+  components: {
+    TaskDialog,
+  },
 };
 </script>
 
