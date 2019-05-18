@@ -12,7 +12,7 @@
       <v-tab to="/validated">Validated Tasks</v-tab>
     </v-tabs>
 
-    <v-container grid-list-md text-xs-center>
+    <v-container fluid grid-list-md text-xs-center>
       <v-layout row wrap>
         <v-flex v-for="i in 4" :key="`3${i}`" xs3>
           <v-card dark color="secondary">

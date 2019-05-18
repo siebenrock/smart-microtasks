@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid fill-height class="home-hero">
+  <v-container fill-height class="home-hero">
     <v-layout justify-center align-center column pa-5>
       <h1>About</h1>
     </v-layout>
