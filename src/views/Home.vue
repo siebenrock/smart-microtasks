@@ -7,9 +7,10 @@
     </v-container>
 
     <v-tabs fixed-tabs color="rgba(255, 0, 0, 0)">
-      <v-tab to="/open" @click="tab = 0">Open Tasks</v-tab>
-      <v-tab to="/completed" @click="tab = 1">Completed Tasks</v-tab>
-      <v-tab to="/validated" @click="tab = 2">Validated Tasks</v-tab>
+      <v-tab @click="tab = 0">Open Tasks</v-tab>
+      <v-tab @click="tab = 1">Completed Tasks</v-tab>
+      <v-tab @click="tab = 2">Validated Tasks</v-tab>
+      <!-- to="/validated"  -->
     </v-tabs>
 
     <v-container fluid grid-list-md>
