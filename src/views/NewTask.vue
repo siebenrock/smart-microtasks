@@ -7,7 +7,7 @@
             >Description</v-stepper-step
           >
           <v-divider></v-divider>
-          <v-stepper-step :complete="e1 > 2" step="2">Details</v-stepper-step>
+          <v-stepper-step :complete="e1 > 2" step="2">Due Date</v-stepper-step>
           <v-divider></v-divider>
           <v-stepper-step step="3">Reward</v-stepper-step>
         </v-container>
@@ -16,6 +16,7 @@
       <v-stepper-items>
         <v-container fill-height>
           <v-stepper-content step="1">
+            <h2>Task Description</h2>
             <v-textarea
               outline
               name="Description"
@@ -24,47 +25,49 @@
               clearable="true"
               autofocus="true"
             ></v-textarea>
-
+            <router-link :to="{ name: 'home' }">
+              <v-btn flat>Back</v-btn>
+            </router-link>
             <v-btn color="primary" @click="e1 = 2">
               Continue
             </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="2">
+            <h2>Task Due Date</h2>
             <v-layout justify-center align-center>
               <v-date-picker
                 v-model="picker"
                 first-day-of-week="1"
               ></v-date-picker>
             </v-layout>
-
+            <v-btn flat @click="e1 = 1">Back</v-btn>
             <v-btn color="primary" @click="e1 = 3">
               Continue
             </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <v-card class="mb-5" color="grey lighten-1" height="200px"
-              >Step 3</v-card
-            >
-
+            <h2>Completion Reward</h2>
             <v-text-field
-              label="MyAddress"
+              name="MyAddress"
+              label="My Address"
               placeholder="00000"
               disabled="true"
               outline
             ></v-text-field>
-
             <v-text-field
-              label="MyAddress"
-              placeholder="00000"
+              name="Reward"
+              label="Reward"
+              placeholder="0"
               clearable="true"
               autofocus="true"
               outline
             ></v-text-field>
 
+            <v-btn flat @click="e1 = 2">Back</v-btn>
             <v-btn color="primary" @click="e1 = 1">
-              Continue
+              Submit
             </v-btn>
           </v-stepper-content>
         </v-container>
@@ -74,6 +77,7 @@
 </template>
 
 <script>
+var today = new Date();
 export default {
   data() {
     return {
@@ -85,10 +89,7 @@ export default {
 </script>
 
 <style scoped>
-li a {
-  text-decoration: none;
-}
-div {
-  text-decoration: none;
+h2 {
+  margin-bottom: 20px;
 }
 </style>
