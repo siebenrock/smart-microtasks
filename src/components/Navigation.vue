@@ -3,7 +3,7 @@
     <v-navigation-drawer
       app
       v-model="drawer"
-      class="light-blue lighten-2"
+      class="light-blue darken-3"
       dark
       disable-resize-watcher
     >
@@ -28,7 +28,7 @@
       <v-btn flat class="hidden-sm-and-down">Menu</v-btn>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
       <v-btn flat class="hidden-sm-and-down">SIGN IN</v-btn>
-      <v-btn color="brown lighten-3" class="hidden-sm-and-down">JOIN</v-btn>
+      <v-btn color="light-blue darken-2" class="hidden-sm-and-down">JOIN</v-btn>
     </v-toolbar>
   </span>
 </template>
