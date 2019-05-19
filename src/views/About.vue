@@ -7,8 +7,11 @@
 </template>
 
 <style scoped>
+h1 {
+  margin-bottom: 15px;
+}
 .home-hero {
   width: 100%;
-  height: 20%;
+  height: 200px;
 }
 </style>
