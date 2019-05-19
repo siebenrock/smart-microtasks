@@ -7,7 +7,7 @@
     </v-container>
 
     <v-layout justify-center align-center>
-      <v-flex xs8 md6>
+      <v-flex xs10 md6>
         <h3>Smart Contracts</h3>
         <p>
           Smart contracts are one of the most powerful applications of

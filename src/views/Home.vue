@@ -113,7 +113,7 @@ h1 {
 .home-hero {
   width: 100%;
   height: 250px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 .me {
   padding: 5px;
