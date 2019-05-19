@@ -13,7 +13,8 @@
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuetify": "^1.5.5",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "web3": "^1.0.0-beta.55"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.7.0",
