@@ -183,6 +183,10 @@ class MTMTContractWorker {
 
 	constructor (store) {
 		this.store = store;
+
+		web3.eth.getAccounts().then( function(accounts) {
+			store.commit('setWalletAddress', accounts[0]);
+		});
 	}
 
 	getWalletAddress() {
