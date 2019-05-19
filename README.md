@@ -5,6 +5,7 @@
 ## Notes
 
 - Vue 3.7.0
+- npm 6.8.0
 
 ## Project setup
 
