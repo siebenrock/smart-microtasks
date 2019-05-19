@@ -1,5 +1,6 @@
 <template>
   <span>
+    {{ taskList }}
     <v-stepper v-model="e1">
       <v-stepper-header>
         <v-container fill-height>
@@ -17,7 +18,16 @@
         <v-container fill-height>
           <v-stepper-content step="1">
             <h2>Task Description</h2>
+            <v-text-field
+              v-model="title"
+              name="Title"
+              label="Title"
+              clearable="true"
+              autofocus="true"
+              outline
+            ></v-text-field>
             <v-textarea
+              v-model="description"
               outline
               name="Description"
               label="Description"
@@ -37,9 +47,10 @@
             <h2>Task Due Date</h2>
             <v-layout justify-center align-center>
               <v-date-picker
-                v-model="picker"
+                v-model="date"
                 first-day-of-week="1"
                 :min="todayDate"
+                class="picker"
               ></v-date-picker>
             </v-layout>
             <v-btn flat @click="e1 = 1">Back</v-btn>
@@ -53,21 +64,21 @@
             <v-text-field
               name="MyAddress"
               label="My Address"
-              placeholder="00000"
+              :placeholder="walletAddress"
               disabled="true"
               outline
             ></v-text-field>
             <v-text-field
+              v-model="reward"
               name="Reward"
               label="Reward"
-              placeholder="0"
               clearable="true"
               autofocus="true"
               outline
             ></v-text-field>
 
             <v-btn flat @click="e1 = 2">Back</v-btn>
-            <v-btn color="primary" @click="snackbar = true">
+            <v-btn color="primary" @click="submit">
               Submit
             </v-btn>
 
@@ -90,14 +101,79 @@
 </template>
 
 <script>
+import MTMTContractWorker from "@/MTMTContractWorker";
+
 export default {
   data() {
     return {
       e1: 0,
-      picker: new Date().toISOString().substr(0, 10),
+      date: new Date().toISOString().substr(0, 10),
       todayDate: new Date().toISOString().substr(0, 10),
       snackbar: false,
+      contractWorker: new MTMTContractWorker(this.$store),
+      taskList: [],
     };
+  },
+  computed: {
+    walletAddress() {
+      return this.contractWorker.getWalletAddress();
+    },
+  },
+  methods: {
+    submit() {
+      // Todo: Upload description to IPFS
+
+      let ob = {
+        title: this.title,
+        description: this.description
+      }
+      // Uploading the task to ipfs
+      const ipfs = window.IpfsApi('10.181.39.3', 5001) // Connect to IPFS
+      const buf = buffer.Buffer(JSON.stringify(ob)) // Convert data into buffer
+      ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
+        if(err) {
+          console.error(err)
+          return
+        }
+        let url = `https://ipfs.io/ipfs/${result[0].hash}`
+        console.log(`Url --> ${url}`)
+      })
+      
+      // Submit task to smart contract
+      this.contractWorker.addTask(
+        // result[0].hash,
+        "0x1234567",
+        new Date(this.date).getTime(),
+        this.reward,
+      );
+
+      alert(
+        "Submitted task:" +
+          "\nTitle: " +
+          this.title +
+          "\nDescription: " +
+          this.description +
+          "\nDate: " +
+          this.date +
+          "\nReward: " +
+          this.reward,
+      );
+      this.snackbar = true;
+    },
+  },
+  computed: {
+    walletAddress () {
+      return this.$store.getters['getWalletAddress']
+    },
+    form() {
+      return {
+        title: this.title,
+        description: this.description,
+        date: this.date,
+        address: this.address,
+        reward: this.reward,
+      };
+    },
   },
 };
 </script>
@@ -114,5 +190,8 @@ div {
 }
 a {
   text-decoration: none;
+}
+.picker {
+  margin-bottom: 15px;
 }
 </style>
