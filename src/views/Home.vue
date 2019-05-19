@@ -7,37 +7,23 @@
     </v-container>
 
     <v-tabs fixed-tabs color="rgba(255, 0, 0, 0)">
-      <v-tab to="/open">Open Tasks</v-tab>
-      <v-tab to="/completed">Completed Tasks</v-tab>
-      <v-tab to="/validated">Validated Tasks</v-tab>
+      <v-tab @click="tab = 0">Open Tasks</v-tab>
+      <v-tab @click="tab = 1">Completed Tasks</v-tab>
+      <v-tab @click="tab = 2">Validated Tasks</v-tab>
+      <!-- to="/validated"  -->
     </v-tabs>
 
-    <v-container grid-list-md text-xs-center>
+    <v-container fluid grid-list-md>
       <v-layout row wrap>
-        <v-flex xs3>
-          <v-card dark color="secondary">
-        <form action="/">
-          <fieldset>
-            <legend>Upload photo</legend>
-            <input type="file" name="photo" id="photo">
-            <a @click="upload">Upload</a>
-          </fieldset>
-        </form>
-        </br>
-        </br>
-        <a id="url"></a>
-        </br>
-        </br>
-        <img id="output">
-            <v-card-text class="px-0">3</v-card-text>
-          </v-card>
-        </v-flex>
+        <v-flex v-for="i in 16" :key="`3${i}`" xs3> <Task></Task></v-flex>
       </v-layout>
     </v-container>
   </span>
 </template>
 
 <script>
+import Task from "@/components/Task";
+
 export default {
   methods:{
     upload: function() {
@@ -65,6 +51,14 @@ export default {
     }
   },
   name: "home",
+  components: {
+    Task,
+  },
+  data() {
+    return {
+      tab: 0,
+    };
+  },
 };
 </script>
 
