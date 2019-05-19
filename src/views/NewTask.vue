@@ -1,6 +1,6 @@
 <template>
   <span>
-    {{taskList}}
+    {{ taskList }}
     <v-stepper v-model="e1">
       <v-stepper-header>
         <v-container fill-height>
@@ -18,6 +18,14 @@
         <v-container fill-height>
           <v-stepper-content step="1">
             <h2>Task Description</h2>
+            <v-text-field
+              v-model="title"
+              name="Title"
+              label="Title"
+              clearable="true"
+              autofocus="true"
+              outline
+            ></v-text-field>
             <v-textarea
               v-model="description"
               outline
@@ -64,7 +72,6 @@
               v-model="reward"
               name="Reward"
               label="Reward"
-              placeholder="0"
               clearable="true"
               autofocus="true"
               outline
@@ -94,7 +101,7 @@
 </template>
 
 <script>
-import MTMTContractWorker from '@/MTMTContractWorker';
+import MTMTContractWorker from "@/MTMTContractWorker";
 
 export default {
   data() {
@@ -104,12 +111,12 @@ export default {
       todayDate: new Date().toISOString().substr(0, 10),
       snackbar: false,
       contractWorker: new MTMTContractWorker(this.$store),
-      taskList: []
+      taskList: [],
     };
   },
   computed: {
     walletAddress() {
-      return this.contractWorker.getWalletAddress()
+      return this.contractWorker.getWalletAddress();
     },
   },
   methods: {
@@ -133,10 +140,16 @@ export default {
       })
       
       // Submit task to smart contract
-      this.contractWorker.addTask("0x2345", (new Date(this.date)).getTime(), this.reward)
+      this.contractWorker.addTask(
+        "0x2345",
+        new Date(this.date).getTime(),
+        this.reward,
+      );
 
       alert(
         "Submitted task:" +
+          "\nTitle: " +
+          this.title +
           "\nDescription: " +
           this.description +
           "\nDate: " +
@@ -150,6 +163,7 @@ export default {
   computed: {
     form() {
       return {
+        title: this.title,
         description: this.description,
         date: this.date,
         address: this.address,
