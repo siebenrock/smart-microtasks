@@ -3,12 +3,12 @@
     <v-card color="white">
       <v-card-title primary-title>
         <div>
-          <h3 class="headline">{{ taskData.title }}</h3>
+          <h3 class="headline">{{ taskSampleData.title }}</h3>
           <div>
-            Due: <i>{{ taskData.dueDate }}</i>
+            Due: <i>{{ taskSampleData.dueDate }}</i>
           </div>
           <div>
-            Reward: <i>{{ taskData.reward }} ETH</i>
+            Reward: <i>{{ taskSampleData.reward }} ETH</i>
           </div>
         </div>
       </v-card-title>
@@ -26,22 +26,22 @@
           <v-card>
             <span>
               <v-card-title class="headline blue-grey lighten-5" primary-title>
-                {{ taskData.title }}
+                {{ taskSampleData.title }}
               </v-card-title>
 
               <v-card-text>
                 <div>
-                  Deadline: <i>{{ taskData.dueDate }}</i>
+                  Deadline: <i>{{ taskSampleData.dueDate }}</i>
                 </div>
                 <div>
-                  Reward: <i>{{ taskData.reward }} ETH</i>
+                  Reward: <i>{{ taskSampleData.reward }} ETH</i>
                 </div>
               </v-card-text>
 
               <v-divider></v-divider>
 
               <v-card-text>
-                {{ taskData.description }}
+                {{ taskSampleData.description }}
               </v-card-text>
 
               <v-divider></v-divider>
@@ -68,32 +68,34 @@
                         class="headline blue-grey lighten-5"
                         primary-title
                       >
-                        WORK_ON_TASK
+                        Confirm Task Completion
                       </v-card-title>
 
                       <v-card-text>
                         <div>
                           <form action="/">
                             <fieldset>
-                              <legend>Upload photo</legend>
-                              <input type="file" name="photo" :id="'photo'+taskData.id">
-                              <a type="button" @click="upload(taskData.id)">Upload</a>
+                              <legend>Upload Photo</legend>
+                              <input
+                                type="file"
+                                name="photo"
+                                :id="'photo' + taskData.id"
+                              />
+                              <v-btn
+                                color="blue"
+                                flat
+                                @click="upload(taskData.id)"
+                              >
+                                Upload
+                              </v-btn>
                             </fieldset>
                           </form>
-                          </br>
-                          </br>
+
                           <a id="url"></a>
-                          </br>
-                          </br>
-                          <img id="output">                        </div>
+
+                          <img id="output" />
+                        </div>
                       </v-card-text>
-
-                      <v-divider></v-divider>
-
-                      <v-card-text>
-                        INFO2
-                      </v-card-text>
-
                       <v-divider></v-divider>
                       <v-card-actions>
                         <v-btn
@@ -108,7 +110,9 @@
                           color="blue"
                           flat
                           @click="
-                            (dialogTaskComplete = false), (dialog = false)
+                            (dialogTaskComplete = false),
+                              (dialog = false),
+                              (this.snackbar = true)
                           "
                         >
                           Task Completed
@@ -123,56 +127,75 @@
         </v-dialog>
       </v-card-actions>
     </v-card>
+
+    <v-snackbar v-model="snackbar" color="green" timeout="4000" vertical="true">
+      Task completion successful!
+      <v-btn dark flat @click="snackbar = false">
+        Close
+      </v-btn>
+    </v-snackbar>
   </span>
 </template>
 
 <script>
-import FileSerializer from "@/FileSerializer"
+import FileSerializer from "@/FileSerializer";
 
 export default {
-  methods:{
+  methods: {
     upload: function(id) {
       console.log(id);
       const reader = new FileReader();
       reader.onloadend = function() {
-        const ipfs = window.IpfsApi('localhost', 5001) // Connect to IPFS
-        const buf = buffer.Buffer(reader.result) // Convert data into buffer
-        ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
-          if(err) {
-            console.error(err)
-            return
+        const ipfs = window.IpfsApi("localhost", 5001); // Connect to IPFS
+        const buf = buffer.Buffer(reader.result); // Convert data into buffer
+        ipfs.files.add(buf, (err, result) => {
+          // Upload buffer to IPFS
+          if (err) {
+            console.error(err);
+            return;
           }
-          let url = `https://ipfs.io/ipfs/${result[0].hash}`
-          console.log(`Url --> ${url}`)
-          document.getElementById("url").innerHTML= url
-          document.getElementById("url").href= url
-          document.getElementById("output").src = url
-        })
-      }
-      const photo = document.getElementById("photo"+id);
-      console.log(photo.files[0]) 
+          let url = `https://ipfs.io/ipfs/${result[0].hash}`;
+          console.log(`Url --> ${url}`);
+          document.getElementById("url").innerHTML = url;
+          document.getElementById("url").href = url;
+          document.getElementById("output").src = url;
+        });
+      };
+      const photo = document.getElementById("photo" + id);
+      console.log(photo.files[0]);
       let fs = new FileSerializer();
-      fs.createZip({
-        title:"Test Task"
-      }, photo.files)
+      fs.createZip(
+        {
+          title: "Test Task",
+        },
+        photo.files,
+      );
       reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
-    }
+    },
   },
   name: "Task",
   props: {
-    task: Object
+    task: Object,
   },
   data() {
     return {
       dialog: false,
       dialogTaskComplete: false,
-    }
+      snackbar: false,
+      taskSampleData: {
+        title: "Test",
+        dueDate: "2019-05-25",
+        reward: 0.002,
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      },
+    };
   },
   computed: {
-    taskData () {
+    taskData() {
       return this.task;
-    }
-  }
+    },
+  },
 };
 </script>
 

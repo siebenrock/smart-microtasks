@@ -1,29 +1,29 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import Task from "@/models/Task"
+import Task from "@/models/Task";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     allTasks: [],
-    address: null
+    address: null,
   },
   getters: {
-    getAllTasks: state => {
-      return state.allTasks
+    getAllTasks: (state) => {
+      return state.allTasks;
     },
-    getWalletAddress: state => {
-      return state.address
+    getWalletAddress: (state) => {
+      return state.address;
     },
   },
   mutations: {
-    setTasks (state, tasks) {
-      state.allTasks = tasks.map(t => new Task(t));
+    setTasks(state, tasks) {
+      state.allTasks = tasks.map((t) => new Task(t));
     },
-    setWalletAddress (state, address) {
+    setWalletAddress(state, address) {
       state.address = new String(address);
-    }
+    },
   },
   actions: {},
 });

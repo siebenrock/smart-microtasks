@@ -1,6 +1,5 @@
 <template>
   <span>
-    {{ taskList }}
     <v-stepper v-model="e1">
       <v-stepper-header>
         <v-container fill-height>
@@ -60,7 +59,7 @@
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <h2>Completion Reward</h2>
+            <h2>Task Completion Reward</h2>
             <v-text-field
               name="MyAddress"
               label="My Address"
@@ -114,31 +113,27 @@ export default {
       taskList: [],
     };
   },
-  computed: {
-    walletAddress() {
-      return this.contractWorker.getWalletAddress();
-    },
-  },
   methods: {
     submit() {
       // Todo: Upload description to IPFS
 
       let ob = {
         title: this.title,
-        description: this.description
-      }
+        description: this.description,
+      };
       // Uploading the task to ipfs
-      const ipfs = window.IpfsApi('10.181.39.3', 5001) // Connect to IPFS
-      const buf = buffer.Buffer(JSON.stringify(ob)) // Convert data into buffer
-      ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
-        if(err) {
-          console.error(err)
-          return
+      const ipfs = window.IpfsApi("10.181.39.3", 5001); // Connect to IPFS
+      const buf = buffer.Buffer(JSON.stringify(ob)); // Convert data into buffer
+      ipfs.files.add(buf, (err, result) => {
+        // Upload buffer to IPFS
+        if (err) {
+          console.error(err);
+          return;
         }
-        let url = `https://ipfs.io/ipfs/${result[0].hash}`
-        console.log(`Url --> ${url}`)
-      })
-      
+        let url = `https://ipfs.io/ipfs/${result[0].hash}`;
+        console.log(`Url --> ${url}`);
+      });
+
       // Submit task to smart contract
       this.contractWorker.addTask(
         // result[0].hash,
@@ -162,8 +157,9 @@ export default {
     },
   },
   computed: {
-    walletAddress () {
-      return this.$store.getters['getWalletAddress']
+    walletAddress() {
+      // return this.contractWorker.getWalletAddress();
+      return this.$store.getters["getWalletAddress"];
     },
     form() {
       return {
