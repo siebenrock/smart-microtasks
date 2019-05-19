@@ -166,8 +166,8 @@ class MTMTContractWorker {
     // deadline: time in milliseconds since 1970
     addTask(description, deadline, value) {
 
-		MTMTContract.methods.
-			addTask(web3.utils.fromAscii(description), deadline)
+		MTMTContract.methods
+			.addTask(web3.utils.fromAscii(description), deadline)
 			.send({from: account, value: value})
 			.on('transactionHash', (hash) => {
 				console.log('transactionHash', hash);
@@ -188,7 +188,26 @@ class MTMTContractWorker {
 				this.store && this.store.commit('setTasks', result);
 				callback && callback(result);
 			});
-    }
+	}
+
+	// task: the task to which the solution is being submitted
+	// deliverable: IPFS address as string
+	submitTaskSolution(task, deliverable) {
+		MTMTContract.methods
+			.submitTaskSolution(web3.utils.fromAscii(deliverable), task_id)
+			.send({from: account, value: value})
+			.on('transactionHash', (hash) => {
+				console.log('transactionHash', hash);
+			})
+			.on('confirmation', (confirmationNumber, receipt) => {
+				console.log('confirmation', confirmationNumber, receipt);
+			})
+			.on('receipt', (receipt) => {
+				// receipt example
+				console.log('receipt', receipt);	
+    		})
+			.on('error', console.error); 
+	}
 }
 
 export default MTMTContractWorker;

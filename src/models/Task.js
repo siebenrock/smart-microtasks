@@ -14,4 +14,4 @@ class Task {
     
 }
 
-export default MTMTContractWorker;
+export default Task;
