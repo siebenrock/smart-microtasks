@@ -1,38 +1,35 @@
 <template>
   <span>
     <v-container fluid fill-height class="home-hero">
-      <v-layout row>
-        <v-flex grow pa-1>
-          <v-layout justify-center align-center column pa-5>
-            <h1>Open Tasks</h1>
-          </v-layout>
-        </v-flex>
-        <v-flex shrink pa-1>
+      <v-layout justify-center align-center column pa-5>
+        <h1>Open Tasks</h1>
+
+        <v-layout row>
           <v-card dark color="light-blue darken-2" class="me">
             <v-list-tile>
               <v-list-tile-action>
-                <v-icon color="white">account_circle</v-icon>
+                <v-icon color="white">perm_identity</v-icon>
               </v-list-tile-action>
 
               <v-list-tile-content>
-                <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-                <v-list-tile-sub-title>Mobile</v-list-tile-sub-title>
+                <v-list-tile-title>Max Mustermann</v-list-tile-title>
+                <v-list-tile-sub-title>Name</v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-card>
           <v-card dark color="light-blue darken-2" class="me">
             <v-list-tile>
               <v-list-tile-action>
-                <v-icon color="white">account_circle</v-icon>
+                <v-icon color="white">language</v-icon>
               </v-list-tile-action>
 
               <v-list-tile-content>
-                <v-list-tile-title>(650) 555-1234</v-list-tile-title>
-                <v-list-tile-sub-title>Mobile</v-list-tile-sub-title>
+                <v-list-tile-title>0xBB9bc2</v-list-tile-title>
+                <v-list-tile-sub-title>Address</v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
           </v-card>
-        </v-flex>
+        </v-layout>
       </v-layout>
     </v-container>
 
@@ -73,6 +70,8 @@ export default {
   height: 20%;
 }
 .me {
-  margin-bottom: 10px;
+  margin: 20px 5px 10px;
+  width: 250px;
+  height: 50px;
 }
 </style>
