@@ -24,7 +24,7 @@
               </v-list-tile-action>
 
               <v-list-tile-content>
-                <v-list-tile-title>0xBB9bc2</v-list-tile-title>
+                <v-list-tile-title>{{walletAddress}}</v-list-tile-title>
                 <v-list-tile-sub-title>Address</v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
@@ -71,6 +71,9 @@ export default {
   computed: {
     allTasks () {
       return this.$store.getters['getAllTasks'];
+    },
+    walletAddress () {
+      return this.$store.getters['getWalletAddress']
     }
   },
 };
