@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import Task from "@/models/Task"
 
 Vue.use(Vuex);
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
   },
   mutations: {
     setTasks (state, tasks) {
-      state.allTasks = tasks;
+      state.allTasks = tasks.map(t => new Task(t));
+
     }
   },
   actions: {},
