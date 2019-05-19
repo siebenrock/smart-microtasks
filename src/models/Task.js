@@ -6,6 +6,7 @@ class Task {
         console.log(ethereum_task);
         
         this._source = ethereum_task;
+        this.id = ethereum_task.id;
         this.owner = ethereum_task.owner;
         this.deadline = Date(ethereum_task.deadline);
         this.reward = parseInt(ethereum_task.reward);
