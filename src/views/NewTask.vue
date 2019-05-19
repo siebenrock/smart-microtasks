@@ -116,6 +116,22 @@ export default {
     submit() {
       // Todo: Upload description to IPFS
 
+      let ob = {
+        title: this.title,
+        description: this.description
+      }
+      // Uploading the task to ipfs
+      const ipfs = window.IpfsApi('localhost', 5001) // Connect to IPFS
+      const buf = buffer.Buffer(JSON.stringify(ob)) // Convert data into buffer
+      ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
+        if(err) {
+          console.error(err)
+          return
+        }
+        let url = `https://ipfs.io/ipfs/${result[0].hash}`
+        console.log(`Url --> ${url}`)
+      })
+      
       // Submit task to smart contract
       this.contractWorker.addTask("0x2345", (new Date(this.date)).getTime(), this.reward)
 
