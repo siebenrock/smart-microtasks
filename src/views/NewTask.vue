@@ -18,6 +18,7 @@
           <v-stepper-content step="1">
             <h2>Task Description</h2>
             <v-textarea
+              v-model="description"
               outline
               name="Description"
               label="Description"
@@ -37,7 +38,7 @@
             <h2>Task Due Date</h2>
             <v-layout justify-center align-center>
               <v-date-picker
-                v-model="picker"
+                v-model="date"
                 first-day-of-week="1"
                 :min="todayDate"
               ></v-date-picker>
@@ -53,11 +54,12 @@
             <v-text-field
               name="MyAddress"
               label="My Address"
-              placeholder="00000"
+              :placeholder="address"
               disabled="true"
               outline
             ></v-text-field>
             <v-text-field
+              v-model="reward"
               name="Reward"
               label="Reward"
               placeholder="0"
@@ -67,7 +69,7 @@
             ></v-text-field>
 
             <v-btn flat @click="e1 = 2">Back</v-btn>
-            <v-btn color="primary" @click="snackbar = true">
+            <v-btn color="primary" @click="submit">
               Submit
             </v-btn>
 
@@ -94,10 +96,35 @@ export default {
   data() {
     return {
       e1: 0,
-      picker: new Date().toISOString().substr(0, 10),
+      date: new Date().toISOString().substr(0, 10),
       todayDate: new Date().toISOString().substr(0, 10),
       snackbar: false,
+      address: "12345",
     };
+  },
+  methods: {
+    submit() {
+      alert(
+        "Submitted task:" +
+          "\nDescription: " +
+          this.description +
+          "\nDate: " +
+          this.date +
+          "\nReward: " +
+          this.reward,
+      );
+      this.snackbar = true;
+    },
+  },
+  computed: {
+    form() {
+      return {
+        description: this.description,
+        date: this.date,
+        address: this.address,
+        reward: this.reward,
+      };
+    },
   },
 };
 </script>

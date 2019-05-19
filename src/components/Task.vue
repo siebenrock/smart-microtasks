@@ -51,7 +51,7 @@
                 </v-btn>
                 <v-spacer></v-spacer>
                 <v-btn color="blue" flat @click="dialog = false">
-                  Start Task
+                  Task Completed
                 </v-btn>
               </v-card-actions>
             </span>
