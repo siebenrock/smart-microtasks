@@ -15,7 +15,9 @@
 
     <v-container fluid grid-list-md>
       <v-layout row wrap>
-        <v-flex v-for="i in 16" :key="`3${i}`" xs3> <Task></Task></v-flex>
+        <v-flex v-for="task in allTasks" :key="task.id" xs3> 
+          <Task :task="task"></Task>
+        </v-flex>
       </v-layout>
     </v-container>
   </span>
@@ -23,16 +25,26 @@
 
 <script>
 import Task from "@/components/Task";
+import MTMTContractWorker from "@/MTMTContractWorker";
 
 export default {
   name: "home",
   components: {
-    Task,
+    Task
   },
   data() {
     return {
       tab: 0,
+      contractWorker: new MTMTContractWorker(this.$store)
     };
+  },
+  mounted () {  
+    this.contractWorker.getAllTasks()
+  },
+  computed: {
+    allTasks () {
+      return this.$store.getters['getAllTasks'];
+    }
   },
 };
 </script>

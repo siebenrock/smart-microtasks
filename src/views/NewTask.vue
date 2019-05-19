@@ -1,5 +1,6 @@
 <template>
   <span>
+    {{taskList}}
     <v-stepper v-model="e1">
       <v-stepper-header>
         <v-container fill-height>
@@ -101,13 +102,14 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       todayDate: new Date().toISOString().substr(0, 10),
       snackbar: false,
-      contractWorker: new MTMTContractWorker()
+      contractWorker: new MTMTContractWorker(this.$store),
+      taskList: []
     };
   },
   computed: {
     walletAddress() {
       return this.contractWorker.getWalletAddress()
-    }
+    },
   },
   methods: {
     submit() {

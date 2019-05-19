@@ -154,6 +154,10 @@ web3.eth.getAccounts().then( function(accounts) {
 
 class MTMTContractWorker {
 
+	constructor (store) {
+		this.store = store;
+	}
+
 	getWalletAddress() {
 		return account;
 	}
@@ -178,8 +182,12 @@ class MTMTContractWorker {
 			.on('error', console.error); 
     }
 
-    getTasks() {
-        MTMTContract.methods.getTasks().call();
+    getAllTasks(callback) {
+		MTMTContract.methods.getAllTasks().call()
+			.then((result) => {
+				this.store && this.store.commit('setTasks', result);
+				callback && callback(result);
+			});
     }
 }
 
