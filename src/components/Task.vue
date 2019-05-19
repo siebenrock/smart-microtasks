@@ -152,7 +152,9 @@ export default {
       const photo = document.getElementById("photo"+id);
       console.log(photo.files[0]) 
       let fs = new FileSerializer();
-      fs.createZip({}, photo.files)
+      fs.createZip({
+        title:"Test Task"
+      }, photo.files)
       reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
     }
   },

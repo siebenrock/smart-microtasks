@@ -12,16 +12,15 @@ class FileSerializer {
         zip.folder("uploads")
 
         for (let file of files) {
-            // Todo
-            zip.folder("uploads").file("filename", file)
+            zip.folder("uploads").file(file.name, file)
         }
-
-        return file;
+        return zip;
     }
 
-    downloadZip(zip) {
+    downloadZip(zip, name) {
+        let filename = (name || 'downloads') + '.zip'
         zip.generateAsync({type:"blob"}).then(function (blob) { // 1) generate the zip file
-            saveAs(blob, "hello.zip");                          // 2) trigger the download
+            saveAs(blob, filename);                          // 2) trigger the download
         }, function (err) {
             jQuery("#blob").text(err);
         });
