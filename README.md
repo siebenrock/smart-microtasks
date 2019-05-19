@@ -27,6 +27,8 @@ justly, without middlemen like banks, governments or notaries.
 
 ## Project setup
 
+Requires MetaMask extension.
+
 ```
 npm install
 ```
