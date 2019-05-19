@@ -127,6 +127,8 @@
 </template>
 
 <script>
+import FileSerializer from "@/FileSerializer"
+
 export default {
   methods:{
     upload: function(id) {
@@ -148,7 +150,9 @@ export default {
         })
       }
       const photo = document.getElementById("photo"+id);
-      console.log(photo.files[0])
+      console.log(photo.files[0]) 
+      let fs = new FileSerializer();
+      fs.createZip({}, photo.files)
       reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
     }
   },
@@ -159,19 +163,8 @@ export default {
   data() {
     return {
       dialog: false,
-<<<<<<< HEAD
       dialogTaskComplete: false,
-      taskData: {
-        title: "Test",
-        dueDate: "2019-05-15",
-        reward: 0.05,
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      },
-    };
-=======
     }
->>>>>>> develop
   },
   computed: {
     taskData () {
