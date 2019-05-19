@@ -100,4 +100,7 @@ a {
 .margin-left {
   margin-left: 20px;
 }
+.v-toolbar__title:not(:first-child) {
+  margin-left: 0px;
+}
 </style>
