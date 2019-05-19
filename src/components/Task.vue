@@ -118,6 +118,9 @@
 <script>
 export default {
   name: "Task",
+  props: {
+    task: Object
+  },
   data() {
     return {
       dialog: false,
