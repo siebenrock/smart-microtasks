@@ -50,9 +50,62 @@
                   Close
                 </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="blue" flat @click="dialog = false">
-                  Task Completed
-                </v-btn>
+
+                <v-dialog
+                  v-model="dialogTaskComplete"
+                  width="95%"
+                  maxWidth="600px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-btn flat color="blue" @click="dialogTaskComplete = true">
+                      Do Task
+                    </v-btn>
+                  </template>
+
+                  <v-card>
+                    <span>
+                      <v-card-title
+                        class="headline blue-grey lighten-5"
+                        primary-title
+                      >
+                        WORK_ON_TASK
+                      </v-card-title>
+
+                      <v-card-text>
+                        <div>
+                          INFO
+                        </div>
+                      </v-card-text>
+
+                      <v-divider></v-divider>
+
+                      <v-card-text>
+                        INFO2
+                      </v-card-text>
+
+                      <v-divider></v-divider>
+                      <v-card-actions>
+                        <v-btn
+                          color="blue"
+                          flat
+                          @click="dialogTaskComplete = false"
+                        >
+                          Close
+                        </v-btn>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                          color="blue"
+                          flat
+                          @click="
+                            (dialogTaskComplete = false), (dialog = false)
+                          "
+                        >
+                          Task Completed
+                        </v-btn>
+                      </v-card-actions>
+                    </span>
+                  </v-card>
+                </v-dialog>
               </v-card-actions>
             </span>
           </v-card>
@@ -68,6 +121,7 @@ export default {
   data() {
     return {
       dialog: false,
+      dialogTaskComplete: false,
       taskData: {
         title: "Test",
         dueDate: "2019-05-15",
