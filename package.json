@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "browserify": "^16.2.3",
+    "buffer": "^5.2.1",
     "core-js": "^2.6.5",
     "file-saver": "^2.0.2",
     "jszip": "^3.2.1",
