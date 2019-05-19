@@ -52,7 +52,13 @@
         @click="drawer = !drawer"
       ></v-toolbar-side-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
-      <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
+
+      <router-link :to="{ name: 'home' }">
+        <v-toolbar-title class="title">
+          {{ appTitle }}
+        </v-toolbar-title>
+      </router-link>
+
       <v-chip color="blue darken-3" class="margin-left"
         >My Balance: 0.32 ETH</v-chip
       >
@@ -102,5 +108,8 @@ a {
 }
 .v-toolbar__title:not(:first-child) {
   margin-left: 0px;
+}
+.title {
+  color: white;
 }
 </style>

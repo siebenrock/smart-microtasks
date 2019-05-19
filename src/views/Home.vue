@@ -74,8 +74,9 @@ h1 {
   padding-bottom: 20px;
 }
 .me {
+  padding: 5px;
   margin: 5px;
   width: 250px;
-  height: 50px;
+  height: 56px;
 }
 </style>

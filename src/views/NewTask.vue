@@ -41,6 +41,7 @@
                 v-model="date"
                 first-day-of-week="1"
                 :min="todayDate"
+                class="picker"
               ></v-date-picker>
             </v-layout>
             <v-btn flat @click="e1 = 1">Back</v-btn>
@@ -141,5 +142,8 @@ div {
 }
 a {
   text-decoration: none;
+}
+.picker {
+  margin-bottom: 15px;
 }
 </style>
