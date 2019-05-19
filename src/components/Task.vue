@@ -16,7 +16,7 @@
       <v-card-actions>
         <!-- <v-btn flat color="blue" @click="dialog = true">View Details</v-btn> -->
 
-        <v-dialog v-model="dialog" maxWidth="95%">
+        <v-dialog v-model="dialog" width="95%" maxWidth="600px">
           <template v-slot:activator="{ on }">
             <v-btn flat color="blue" @click="dialog = true">
               View Details
