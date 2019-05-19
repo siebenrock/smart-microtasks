@@ -4,7 +4,18 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    allTasks: [],
+  },
+  getters: {
+    getAllTasks: state => {
+      return state.allTasks
+    }
+  },
+  mutations: {
+    setTasks (state, tasks) {
+      state.allTasks = tasks;
+    }
+  },
   actions: {},
 });

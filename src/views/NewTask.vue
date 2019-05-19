@@ -1,5 +1,6 @@
 <template>
   <span>
+    {{taskList}}
     <v-stepper v-model="e1">
       <v-stepper-header>
         <v-container fill-height>
@@ -93,6 +94,8 @@
 </template>
 
 <script>
+import MTMTContractWorker from '@/MTMTContractWorker';
+
 export default {
   data() {
     return {
@@ -100,11 +103,22 @@ export default {
       date: new Date().toISOString().substr(0, 10),
       todayDate: new Date().toISOString().substr(0, 10),
       snackbar: false,
-      address: "12345",
+      contractWorker: new MTMTContractWorker(this.$store),
+      taskList: []
     };
+  },
+  computed: {
+    walletAddress() {
+      return this.contractWorker.getWalletAddress()
+    },
   },
   methods: {
     submit() {
+      // Todo: Upload description to IPFS
+
+      // Submit task to smart contract
+      this.contractWorker.addTask("0x2345", (new Date(this.date)).getTime(), this.reward)
+
       alert(
         "Submitted task:" +
           "\nDescription: " +
