@@ -16,6 +16,10 @@ class Task {
         this.description = "";
         this.files = "";
     }
+
+    // decodeIPFSDescription() {
+    //     let url = `https://ipfs.io/ipfs/${result[0].hash}`
+    // }
     
 
 }

@@ -64,7 +64,7 @@
             <v-text-field
               name="MyAddress"
               label="My Address"
-              :placeholder="address"
+              :placeholder="walletAddress"
               disabled="true"
               outline
             ></v-text-field>
@@ -128,7 +128,7 @@ export default {
         description: this.description
       }
       // Uploading the task to ipfs
-      const ipfs = window.IpfsApi('localhost', 5001) // Connect to IPFS
+      const ipfs = window.IpfsApi('10.181.39.3', 5001) // Connect to IPFS
       const buf = buffer.Buffer(JSON.stringify(ob)) // Convert data into buffer
       ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
         if(err) {
@@ -141,7 +141,8 @@ export default {
       
       // Submit task to smart contract
       this.contractWorker.addTask(
-        "0x2345",
+        // result[0].hash,
+        "0x1234567",
         new Date(this.date).getTime(),
         this.reward,
       );
@@ -161,6 +162,9 @@ export default {
     },
   },
   computed: {
+    walletAddress () {
+      return this.$store.getters['getWalletAddress']
+    },
     form() {
       return {
         title: this.title,
