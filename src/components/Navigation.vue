@@ -25,6 +25,10 @@
       ></v-toolbar-side-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
       <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
+      <v-chip color="blue darken-3" class="margin-left"
+        >My Balance: 0.32 ETH</v-chip
+      >
+
       <v-spacer class="hidden-sm-and-down"></v-spacer>
 
       <router-link :to="{ name: 'home' }">
@@ -60,5 +64,8 @@ export default {
 <style scoped>
 nav a {
   text-decoration: none;
+}
+.margin-left {
+  margin-left: 20px;
 }
 </style>
