@@ -1,6 +1,5 @@
 <template>
   <span>
-    {{ taskList }}
     <v-stepper v-model="e1">
       <v-stepper-header>
         <v-container fill-height>
@@ -123,12 +122,23 @@ export default {
     submit() {
       // Todo: Upload description to IPFS
 
+      let task = {
+        id: this.title + "1234",
+        title: this.title,
+        description: this.description,
+        deadline: this.date,
+        owner: this.wowner,
+        reward: this.reward
+      }
+
+      this.$store.commit('setLastTask', task);
+
       let ob = {
         title: this.title,
         description: this.description
       }
       // Uploading the task to ipfs
-      const ipfs = window.IpfsApi('10.181.39.3', 5001) // Connect to IPFS
+      const ipfs = window.IpfsApi('localhost', 5001) // Connect to IPFS
       const buf = buffer.Buffer(JSON.stringify(ob)) // Convert data into buffer
       ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
         if(err) {
@@ -137,15 +147,16 @@ export default {
         }
         let url = `https://ipfs.io/ipfs/${result[0].hash}`
         console.log(`Url --> ${url}`)
+
+        // Submit task to smart contract
+        this.contractWorker.addTask(
+            result[0].hash,
+            new Date(this.date).getTime(),
+            this.reward,
+      );
       })
       
-      // Submit task to smart contract
-      this.contractWorker.addTask(
-        // result[0].hash,
-        "0x1234567",
-        new Date(this.date).getTime(),
-        this.reward,
-      );
+
 
       alert(
         "Submitted task:" +
@@ -158,7 +169,7 @@ export default {
           "\nReward: " +
           this.reward,
       );
-      this.snackbar = true;
+      this.snackbar = false;
     },
   },
   computed: {

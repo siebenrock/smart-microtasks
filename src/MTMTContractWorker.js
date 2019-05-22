@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 
-const CONTRACT_ADDRESS = "0xa94907203f256e9c160eaa7fc6b215b54d4cfaa0";
+const CONTRACT_ADDRESS = "0xfbf77b968c2c33819ac34ec78fd263fe75673c1c";
 const ABI = [
 	{
 		"constant": true,
@@ -195,8 +195,8 @@ class MTMTContractWorker {
 
     // description: IPFS address as string
     // deadline: time in milliseconds since 1970
-    addTask(description, deadline, value) {
-
+	addTask(description, deadline, value) {
+		description = "0x1245"
 		MTMTContract.methods
 			.addTask(web3.utils.fromAscii(description), deadline)
 			.send({from: account, value: value})

@@ -3,7 +3,11 @@
     <v-card color="white">
       <v-card-title primary-title>
         <div>
-          <h3 class="headline">{{ taskData.title }}</h3>
+          <h4 class="headline">{{ taskData.title }}</h4>
+        <div>
+          <h5 class="headline">{{ taskData.description }}</h5>
+            <i>{{ taskData.description }}</i>
+          </div>
           <div>
             Due: <i>{{ taskData.dueDate }}</i>
           </div>
@@ -30,7 +34,11 @@
               </v-card-title>
 
               <v-card-text>
-                <div>
+              <div>
+              <h5 class="headline">{{ taskData.description }}</h5>
+                <i>{{ taskData.description }}</i>
+              </div>
+                    <div>
                   Deadline: <i>{{ taskData.dueDate }}</i>
                 </div>
                 <div>
@@ -151,10 +159,10 @@ export default {
       }
       const photo = document.getElementById("photo"+id);
       console.log(photo.files[0]) 
-      let fs = new FileSerializer();
-      fs.createZip({
-        title:"Test Task"
-      }, photo.files)
+      // let fs = new FileSerializer();
+      // fs.createZip({
+      //   title:"Test Task"
+      // }, photo.files)
       reader.readAsArrayBuffer(photo.files[0]); // Read Provided File
     }
   },
@@ -167,6 +175,9 @@ export default {
       dialog: false,
       dialogTaskComplete: false,
     }
+  },
+  mounted () {
+    console.log(this.task)
   },
   computed: {
     taskData () {

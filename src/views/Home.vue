@@ -45,6 +45,9 @@
         <v-flex v-for="task in allTasks" :key="task.id" xs6 md3> 
           <Task :task="task"></Task>
         </v-flex>
+        <v-flex xs6 md3> 
+          <Task :task="lastTask"></Task>
+        </v-flex>
       </v-layout>
     </v-container>
   </span>
@@ -71,6 +74,9 @@ export default {
   computed: {
     allTasks () {
       return this.$store.getters['getAllTasks'];
+    },
+    lastTask () {
+      return this.$store.getters['getLastTask'];
     },
     walletAddress () {
       return this.$store.getters['getWalletAddress']
