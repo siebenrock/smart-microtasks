@@ -14,6 +14,11 @@ payment is sent.
 
 > Project was developed during a 1.5-day smart contracts hackathon in May 2019.
 
+- Back-end: serverless
+- Front-end: Vue.js
+- Smart contract: Solidity
+- Storage: IPFS distributed file system
+
 ![screen](https://raw.githubusercontent.com/siebenrock/smart-microtasks/master/screen.png)
 
 ## Smart Contracts
