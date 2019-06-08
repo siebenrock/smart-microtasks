@@ -12,12 +12,12 @@ could then be verified by votes of other freelancers on the platform
 for example. Consensus triggers the smart contract and the reward
 payment is sent.
 
-> Project was developed during a 1.5-day smart contracts hackathon in May 2019.
-
 - Back-end: serverless
 - Front-end: Vue.js
 - Smart contract: Solidity
 - Storage: IPFS distributed file system
+
+> Project was developed during a 1.5-day smart contracts hackathon in May 2019.
 
 ![screen](https://raw.githubusercontent.com/siebenrock/smart-microtasks/master/screen.png)
 
