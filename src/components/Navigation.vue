@@ -3,18 +3,46 @@
     <v-navigation-drawer
       app
       v-model="drawer"
-      class="light-blue darken-3"
-      dark
+      class="white"
       disable-resize-watcher
     >
       <v-list>
-        <template v-for="(item, index) in items">
-          <v-list-tile :key="index">
-            <v-list-tile-content>
-              {{ item.title }}
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-divider :key="`divider-${index}`"></v-divider>
+        <template>
+          <router-link :to="{ name: 'home' }">
+            <v-list-tile>
+              <v-list-tile-action>
+                <v-icon color="indigo">view_week</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <a>Overview</a>
+              </v-list-tile-content>
+            </v-list-tile>
+          </router-link>
+          <v-divider></v-divider>
+
+          <router-link :to="{ name: 'about' }">
+            <v-list-tile>
+              <v-list-tile-action>
+                <v-icon color="indigo">info</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <a>About</a>
+              </v-list-tile-content>
+            </v-list-tile>
+          </router-link>
+          <v-divider></v-divider>
+
+          <router-link :to="{ name: 'newTask' }">
+            <v-list-tile>
+              <v-list-tile-action>
+                <v-icon color="indigo">add_circle_outline</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <a>New Task</a>
+              </v-list-tile-content>
+            </v-list-tile>
+          </router-link>
+          <v-divider></v-divider>
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -24,7 +52,17 @@
         @click="drawer = !drawer"
       ></v-toolbar-side-icon>
       <v-spacer class="hidden-md-and-up"></v-spacer>
-      <v-toolbar-title>{{ appTitle }}</v-toolbar-title>
+
+      <router-link :to="{ name: 'home' }">
+        <v-toolbar-title class="title">
+          {{ appTitle }}
+        </v-toolbar-title>
+      </router-link>
+
+      <v-chip color="blue darken-3" class="margin-left"
+        >My Balance: 0.32 ETH</v-chip
+      >
+
       <v-spacer class="hidden-sm-and-down"></v-spacer>
 
       <router-link :to="{ name: 'home' }">
@@ -60,5 +98,18 @@ export default {
 <style scoped>
 nav a {
   text-decoration: none;
+}
+a {
+  color: #37474f;
+  text-decoration: none;
+}
+.margin-left {
+  margin-left: 20px;
+}
+.v-toolbar__title:not(:first-child) {
+  margin-left: 0px;
+}
+.title {
+  color: white;
 }
 </style>
